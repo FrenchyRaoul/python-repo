@@ -1,4 +1,7 @@
+import pymysql
 
+def connect_to_db():
+    pass
 
 def main():
     while True:
