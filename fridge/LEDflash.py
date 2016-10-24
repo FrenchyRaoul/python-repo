@@ -15,12 +15,11 @@ a = 1
 b = 0.025
 
 while True:
-	input = GPIO.input(29)
-	if input == 0:
-		b = 0.25
-	if input == 1:
-		b = 0.5
-	time.sleep(b)
-	a = not(a)
-	GPIO.output(36, a)	
-
+    input = GPIO.input(29)
+    if input == 0:
+        b = 0.25
+    if input == 1:
+        b = 0.5
+    time.sleep(b)
+    a = not (a)
+    GPIO.output(36, a)

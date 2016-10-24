@@ -8,7 +8,6 @@ DHT11 = 11
 DHT22 = 22
 AM2302 = 22
 
-
 dhtreader.init()
 
 if len(sys.argv) != 3:
