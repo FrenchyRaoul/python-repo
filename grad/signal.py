@@ -7,12 +7,13 @@ def padhex(hexint, n):
     n = int(n)
     hexint = int(hexint)
     hexstr = hex(hexint)
-    return hexstr[2:].zfill(n)
+    return hexstr.split('0x')[1].zfill(n)
 
 def quantize(signal, n=16, data='offset_binary'):
     if data == 'offset_binary':
         shifted = signal - min(signal)
-        sized = shifted / max(shifted) * ((2 ** n) - 1)
+        scale = max((max(abs(real(shifted))), max(abs(imag(shifted)))))
+        sized = shifted / scale * ((2 ** n) - 1)
         quantized = round(sized)
     else:
         return None
