@@ -4,8 +4,7 @@ import os
 import RPi.GPIO as GPIO
 import MySQLdb
 import datetime
-import dhtreader
-from movingaverage import movingaverage
+# import dhtreader
 
 # databaseConnect = raw_input('Steam to database? (yes or no)')
 databaseConnect = 'no'# SPI port on the ADC to the Cobbler
@@ -24,19 +23,19 @@ minOnTimeMinutes = 3
 minOffTimeMinutes = 3
 targetTemp = 50
 
-while databaseConnect != ('yes') and databaseConnect != ('no'):
-    databaseConnect = raw_input('Incorrect Input. Stream to database? (yes or no)')
-
-if databaseConnect == 'yes':
-    db = MySQLdb.connect(host="192.168.1.138", user="pi", passwd="raspberry", db="beer")
-    db.autocommit(True)
-    cur = db.cursor()
+# while databaseConnect != ('yes') and databaseConnect != ('no'):
+#     databaseConnect = raw_input('Incorrect Input. Stream to database? (yes or no)')
+#
+# if databaseConnect == 'yes':
+#     db = MySQLdb.connect(host="192.168.1.138", user="pi", passwd="raspberry", db="beer")
+#     db.autocommit(True)
+#     cur = db.cursor()
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 DEBUG = 1
 
-dhtreader.init()
+# dhtreader.init()
 
 
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
@@ -149,10 +148,10 @@ try:
         print("Average Temp is".format(tempF))
         print("-------------------------------")
 
-        if databaseConnect == 'yes':
-            sql = "INSERT INTO temperature (year,month,day,hour,minute,second,temperature,temperature2, humidity) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')" % (
-            year, month, day, hour, minute, second, tempF, tempF2, humidity)
-            cur.execute(sql)
+        # if databaseConnect == 'yes':
+        #     sql = "INSERT INTO temperature (year,month,day,hour,minute,second,temperature,temperature2, humidity) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')" % (
+        #     year, month, day, hour, minute, second, tempF, tempF2, humidity)
+        #     cur.execute(sql)
 
         time.sleep(2)
 except Exception as e:
