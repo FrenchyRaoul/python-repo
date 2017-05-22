@@ -1,4 +1,15 @@
 import pymysql
+import hid
+import time
+import logging
+from threading import Thread
+from collections import deque as dq
+
+from queue import Queue
+import tkinter as tk
+
+LOG = logging.Logger('LOG')
+LOG.setLevel(logging.DEBUG)
 
 def connect_to_db():
     pass
