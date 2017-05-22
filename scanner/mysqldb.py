@@ -1,20 +1,23 @@
 import logging
 from mysql import connector
 
-host = 'host'
-port = 'port'
-username = 'username'
-password = 'password'
+host = 'localhost'
+port = 3306
+username = 'root'
+password = 'gogobuffalo'
+database = 'db'
 
-def get_mysql_conn(schema):
+
+def get_mysql_conn():
     conn = connector.connect(host=host,
                              user=username,
                              password=password,
                              port=port)
     conn.autocommit = True
     cursor = conn.cursor()
-    cursor.execute("USE {}".format(schema))
+    cursor.execute("USE {}".format(database))
     return conn, cursor
+
 
 def create_connection():
     pass
