@@ -5,7 +5,7 @@ host = 'localhost'
 port = 3306
 username = 'root'
 password = 'gogobuffalo'
-database = 'inventory'
+schema = 'inventory'
 
 
 def get_mysql_conn():
@@ -15,7 +15,7 @@ def get_mysql_conn():
                              port=port)
     conn.autocommit = True
     cursor = conn.cursor()
-    cursor.execute("USE {}".format(database))
+    cursor.execute("USE {}".format(schema))
     return conn, cursor
 
 
@@ -35,14 +35,15 @@ def create_table(schema, table):
     conn.disconnect()
 
 
-def drop_table(schema, table):
-    conn, cursor = get_mysql_conn()
-    if table_exists(table):
-        cursor.execute("""DROP TABLE {}.{}""".format(schema, table))
-    conn.disconnect()
+def drop_table(schema, table, *, confirm=False):
+    if confirm:
+        conn, cursor = get_mysql_conn()
+        if table_exists(table):
+            cursor.execute("""DROP TABLE {}.{}""".format(schema, table))
+        conn.disconnect()
 
 
-def table_exists(schema, table):
+def table_exists(table):
     conn, cursor = get_mysql_conn()
     cursor.execute("""SELECT * FROM information_schema.tables
                       WHERE table_schema = '{}'

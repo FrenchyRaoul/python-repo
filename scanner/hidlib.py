@@ -84,8 +84,6 @@ class KeyboardBarcode(hid.device):
 
         return next(self.iterator)[:n]
 
-#     def open(self, *args, **kwargs):
-#         super
 
     def poll_for_keypress(self):
         code = []
